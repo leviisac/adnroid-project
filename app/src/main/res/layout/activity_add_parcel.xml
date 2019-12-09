@@ -8,7 +8,7 @@
 
 
     <Spinner
-        android:id="@+id/spiner"
+        android:id="@+id/typespiner"
         android:layout_width="279dp"
         android:layout_height="23dp"
         android:layout_marginStart="24dp"
@@ -17,8 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.145" />
+
     <Spinner
-        android:id="@+id/planets_spinner"
+        android:id="@+id/weightspinner"
         android:layout_width="279dp"
         android:layout_height="23dp"
         android:layout_marginStart="24dp"
@@ -26,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <CheckBox
         android:id="@+id/checkBox"

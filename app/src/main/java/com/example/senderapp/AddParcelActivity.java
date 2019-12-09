@@ -35,7 +35,7 @@ public class AddParcelActivity extends AppCompatActivity {
         btnDatePicker.setOnClickListener((View.OnClickListener) this);
         btnDatePicker2.setOnClickListener((View.OnClickListener) this);
         //checar conversão
-        int x = 7;
+
 
 
     }

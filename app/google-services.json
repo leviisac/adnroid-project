@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "385221566985",
+    "firebase_url": "https://senderapp-36b7e.firebaseio.com",
+    "project_id": "senderapp-36b7e",
+    "storage_bucket": "senderapp-36b7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385221566985:android:b63e06f5d566aadeee4ed8",
+        "android_client_info": {
+          "package_name": "com.example.senderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385221566985-ishkfi0prvvi14ka8c4ttfchia1ceg9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.senderapp",
+            "certificate_hash": "aad5b48065c02f03147a6ac3af5a9522d002dd9f"
+          }
+        },
+        {
+          "client_id": "385221566985-mqrcg9qmbf1g16r9fojt9jm6avp8lplo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ec_JTuezWglp2MCmZhTOb6GKL6x_fxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385221566985-mqrcg9qmbf1g16r9fojt9jm6avp8lplo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,7 +15,7 @@ public class AddParcelActivity extends AppCompatActivity {
 
     Button btnDatePicker ,btnDatePicker2;
     EditText txtDate,txtDate2;
-    private int mYear, mMonth, mDay;
+    private int mYear, mMonth, mDay,mtest;
 
 
 

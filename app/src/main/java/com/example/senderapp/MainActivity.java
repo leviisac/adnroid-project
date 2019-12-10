@@ -18,11 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn = (Button)findViewById(R.id.button);
 
+
+
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, AddParcelActivity.class));
+                startActivity(new Intent(MainActivity.this, Add_Parcel.class));
             }
         });
+
+
     }
 
 

@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">senderapp</string>
+
+    <string name="type_prompt">Choose the package type</string>
+    <string-array name="type_arrays">
+        <item>Envelope</item>
+        <item>Small Package</item>
+        <item>Big Package</item>
+
+    </string-array>
+
+    <string name="weight_prompt">Choose the package weight</string>
+    <string-array name="weight_arrays">
+        <item>Up to 500 g</item>
+        <item>Up to 1 kg</item>
+        <item>Up to 5 kg</item>
+        <item>Up to 20 kg</item>
+
+    </string-array>
 </resources>

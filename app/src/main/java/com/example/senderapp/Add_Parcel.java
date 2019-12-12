@@ -1,20 +1,6 @@
 package com.example.senderapp;
-
 import android.Manifest;
-import android.content.Context;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
-import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -23,16 +9,33 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+
+
 public class Add_Parcel extends AppCompatActivity implements LocationListener {
+//implements View.OnClickListener
 
     private LocationManager locationManager;
+
+
+    Button btnDatePicker, sendbtnDatePicker;
+    EditText txtDate, sendtxtDate;
+    private int mYear, mMonth, mDay, smYear, smMonth, smDay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +43,26 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         setContentView(R.layout.activity_add__parcel);
 
 
+        btnDatePicker = (Button) findViewById(R.id.btn_date);
+        txtDate = (EditText) findViewById(R.id.in_date);
+
+        sendbtnDatePicker = (Button) findViewById(R.id.btn_send_date);
+        sendtxtDate = (EditText) findViewById(R.id.send_date);
+
+
+
+        //LOCATION CONFIGURATIONS
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Add_Parcel.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
-        }else{
-            locationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER,
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     3000,   // 3 sec
                     0, this);
 
         }
-
-
-
-
 
 
     }
@@ -112,6 +120,62 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO Auto-generated method stub
+
+    }
+
+
+    //calendario em que o pacote sera enviado
+
+    public void onClick(View v) {
+
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
+
+    }
+
+    //evento de clique no botao do segundo calendario(chegada prevista  do pacote)
+    public void onClick2(View v) {
+
+
+
+            // Get Current Date
+            final Calendar d = Calendar.getInstance();
+            smYear = d.get(Calendar.YEAR);
+            smMonth = d.get(Calendar.MONTH);
+            smDay = d.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            sendtxtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        }
+                    }, smYear, smMonth, smDay);
+            datePickerDialog.show();
 
     }
 }

@@ -21,4 +21,5 @@
     <string name="fragile">FRAGILE</string>
     <string name="address">Address</string>
     <string name="name">Name</string>
+    <string name="selectdate">Select Date</string>
 </resources>

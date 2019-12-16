@@ -2,6 +2,7 @@ package com.example.senderapp;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,8 +12,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +35,10 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     private LocationManager locationManager;
 
 
-    Button btnDatePicker, sendbtnDatePicker;
-    EditText txtDate, sendtxtDate;
+    Button btnDatePicker, sendbtnDatePicker,confirm;
+    EditText txtDate, sendtxtDate,name,phone,email,address;
+    CheckBox fragil;
+    Spinner type,weight;
     private int mYear, mMonth, mDay, smYear, smMonth, smDay;
 
 
@@ -48,6 +53,17 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
 
         sendbtnDatePicker = (Button) findViewById(R.id.btn_send_date);
         sendtxtDate = (EditText) findViewById(R.id.send_date);
+
+        name=(EditText) findViewById(R.id.Name);
+        phone=(EditText) findViewById(R.id.Phone);
+        email=(EditText)  findViewById(R.id.Email);
+        address=(EditText)findViewById(R.id.addressText);
+        confirm=(Button) findViewById(R.id.Confirm);
+        fragil=(CheckBox) findViewById(R.id.Fragil);
+        weight=(Spinner) findViewById(R.id.spinner2);
+        type=(Spinner) findViewById(R.id.spinner);
+
+
 
 
 
@@ -177,5 +193,12 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
                     }, smYear, smMonth, smDay);
             datePickerDialog.show();
 
+    }
+
+    public void confirmClick(View v){
+
+
+        Toast.makeText(Add_Parcel.this,"the form has been submitted!",Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(Add_Parcel.this, MainActivity.class));
     }
 }

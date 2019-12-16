@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -145,6 +146,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     public void onClick(View v) {
 
 
+
         // Get Current Date
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -196,12 +198,31 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     }
 
     public void confirmClick(View v){
+        name.setTextColor(Color.BLACK);
+        phone.setTextColor(Color.BLACK);
+        email.setTextColor(Color.BLACK);
+        address.setTextColor(Color.BLACK);
+        Boolean flag=false;
+     if(phone.length() < 9) {
+         flag=true;
+         phone.setTextColor(Color.RED);
 
-     if(phone.toString().length() <9)
-         Toast.makeText(Add_Parcel.this,"incorrect phone",Toast.LENGTH_SHORT).show();
+     }
+    if(!email.getText().toString().contains("@") || !email.getText().toString().contains("co") || !email.getText().toString().contains(".")) {
+        email.setTextColor(Color.RED);
 
-    if(!email.toString().contains("@"))
-        Toast.makeText(Add_Parcel.this,"incorrect email",Toast.LENGTH_SHORT).show();
+        flag=true;
+    }
+    if(address.getText().toString().isEmpty()) {
+        address.setTextColor(Color.RED);
+        flag=true;
+    }
+    if(name.getText().toString().isEmpty()) {
+        name.setTextColor(Color.RED);
+        flag=true;
+    }
+    if(flag)
+        Toast.makeText(Add_Parcel.this,"INCORRECT INPUT",Toast.LENGTH_SHORT).show();
     else{
 
         Toast.makeText(Add_Parcel.this,"the form has been submitted!",Toast.LENGTH_SHORT).show();

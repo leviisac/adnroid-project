@@ -197,8 +197,15 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
 
     public void confirmClick(View v){
 
+     if(phone.toString().length() <9)
+         Toast.makeText(Add_Parcel.this,"incorrect phone",Toast.LENGTH_SHORT).show();
+
+    if(!email.toString().contains("@"))
+        Toast.makeText(Add_Parcel.this,"incorrect email",Toast.LENGTH_SHORT).show();
+    else{
 
         Toast.makeText(Add_Parcel.this,"the form has been submitted!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Add_Parcel.this, MainActivity.class));
+    }
     }
 }

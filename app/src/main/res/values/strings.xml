@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">senderapp</string>
 
+    <string name="Box">Box</string>
+
     <string name="type_prompt">Choose the package type</string>
     <string-array name="type_arrays">
         <item>Envelope</item>

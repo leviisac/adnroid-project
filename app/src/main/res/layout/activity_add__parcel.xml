@@ -179,9 +179,10 @@
         android:layout_marginEnd="26dp"
         android:layout_marginRight="26dp"
         android:ems="10"
-        android:maxLength="10"
         android:hint="Phone"
         android:inputType="phone"
+        android:maxLength="10"
+        android:onClick="phoneClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/send_date" />
@@ -213,6 +214,16 @@
         android:onClick="confirmClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/phonetext"
+        android:layout_width="286dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Phone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

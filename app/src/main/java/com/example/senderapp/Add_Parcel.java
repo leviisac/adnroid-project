@@ -40,6 +40,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     EditText txtDate, sendtxtDate,name,phone,email,address;
     CheckBox fragil;
     Spinner type,weight;
+    TextView phoneText;
     private int mYear, mMonth, mDay, smYear, smMonth, smDay;
 
 
@@ -63,6 +64,8 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         fragil=(CheckBox) findViewById(R.id.Fragil);
         weight=(Spinner) findViewById(R.id.spinner2);
         type=(Spinner) findViewById(R.id.spinner);
+        phoneText=(TextView)  findViewById(R.id.phonetext);
+
 
 
 

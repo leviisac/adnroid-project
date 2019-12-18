@@ -1,11 +1,9 @@
 package com.example.senderapp;
 
-import java.util.Date;
-
 public class Parcel {
 
-    static int IdNumber =1;
-    private int Id;
+
+
     private String Location;
     private String Type;
     private String Weight;
@@ -97,15 +95,11 @@ public class Parcel {
     public String getEmail() {
         return Email;
     }
-    public int getId() {
-        return Id;
-    }
 
-    public void setId(int id) {
-        Id = id;
-    }
 
-    public Parcel(String location, String type, String weight, boolean fragile, String name, String address, String sendDate, String expectedDate, String phoneNumber, String email) {
+
+
+    public Parcel( String location, String type, String weight, boolean fragile, String name, String address, String sendDate, String expectedDate, String phoneNumber, String email) {
         Location = location;
         Type = type;
         Weight = weight;
@@ -116,7 +110,8 @@ public class Parcel {
         ExpectedDate = expectedDate;
         PhoneNumber = phoneNumber;
         Email = email;
-        Id = IdNumber;
-        IdNumber++;
+
+
+
     }
 }

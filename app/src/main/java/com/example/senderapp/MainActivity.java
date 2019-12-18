@@ -27,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn = (Button)findViewById(R.id.button);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://senderapp-85057.firebaseio.com");
+        DatabaseReference myRef = database.getReference("message");
 
+        myRef.setValue("Hello, World!");
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

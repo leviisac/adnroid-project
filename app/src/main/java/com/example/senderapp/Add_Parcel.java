@@ -1,9 +1,7 @@
 package com.example.senderapp;
-import android.Manifest;
+
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -21,36 +19,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
 
 
 
 public class Add_Parcel extends AppCompatActivity implements LocationListener {
 //implements View.OnClickListener
 
-
     private LocationManager locationManager;
 
 
-
     Button btnDatePicker, sendbtnDatePicker,confirm;
-    EditText sendDate, expectedDate,name,phone,email,address;
+    EditText sendDate,name,phone,email,address,expectedDate;
     CheckBox fragil;
     Spinner type,weight;
     TextView phoneText;
-    TextView location;
+    TextView location,emailtext,nametext,addresstext,sendText,expecText,typeText,weightText,status;
     private int mYear, mMonth, mDay, smYear, smMonth, smDay;
 
 
@@ -80,7 +76,14 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         type=(Spinner) findViewById(R.id.spinner);
         phoneText=(TextView)  findViewById(R.id.phonetext);
         location = (TextView) findViewById(R.id.location);
-
+        emailtext=(TextView ) findViewById(R.id.emailtext);
+        addresstext=(TextView ) findViewById(R.id.addresstext);
+        nametext=(TextView ) findViewById(R.id.nameText);
+        sendText=(TextView ) findViewById(R.id.sendtext);
+        expecText=(TextView ) findViewById(R.id.expectText);
+        typeText=(TextView ) findViewById(R.id.spintext1);
+        weightText=(TextView ) findViewById(R.id.spintext2);
+        status=(TextView ) findViewById(R.id.statusText);
        /* new_parcel.setName(name.getText().toString());
         new_parcel.setPhoneNumber(phone.getText().toString());
         new_parcel.setEmail(email.getText().toString());
@@ -92,7 +95,12 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         new_parcel.setSendDate(sendDate.getText().toString());
         new_parcel.setExpectedDate(expectedDate.getText().toString());
         */
+       status.setTextSize(20);
 
+
+
+        //LOCATION CONFIGURATIONS
+        /*
         Location mobileLocation;
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -134,31 +142,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         }
 
     /*
-        confirm.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
 
-                Parcel new_parcel = new Parcel(location.getText().toString(),type.getSelectedItem().toString(),weight.getSelectedItem().toString(),fragil.isChecked(),name.getText().toString(),
-                        address.getText().toString(),sendDate.getText().toString(),expectedDate.getText().toString(),phone.getText().toString(),email.getText().toString()
-                );
-
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Parcel" + new_parcel.getId());
-
-                HashMap<String,String> hashMap =new HashMap<>();
-                hashMap.put("Location",new_parcel.getLocation());
-                hashMap.put("Name",new_parcel.getName());
-                hashMap.put("Phone Number",new_parcel.getPhoneNumber());
-                hashMap.put("Email",new_parcel.getEmail());
-                hashMap.put("Address",new_parcel.getAddress());
-                hashMap.put("Weight",new_parcel.getWeight());
-                hashMap.put("Parcel Type",new_parcel.getType());
-                hashMap.put("Fragile",String.valueOf(new_parcel.isFragile()));
-                hashMap.put("Send Date",new_parcel.getSendDate());
-                hashMap.put("Expected Date",new_parcel.getExpectedDate());
-
-                myRef.setValue(hashMap);
-            }
-        });
 */
 
 
@@ -280,41 +264,80 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
 
     }
 
+
+
     public void confirmClick(View v){
-        name.setTextColor(Color.BLACK);
-        phone.setTextColor(Color.BLACK);
-        email.setTextColor(Color.BLACK);
-        address.setTextColor(Color.BLACK);
+        Calendar now = Calendar.getInstance();
+        sendText.setText("");
+        expecText.setText("");
+        phoneText.setText("");
+        emailtext.setText("");
+        addresstext.setText("");
+        nametext.setText("");
+        expecText.setText("");
+        weightText.setText("");
+
         Boolean flag=false;
+        if(mYear > now.get(Calendar.YEAR)||mMonth > now.get(Calendar.MONTH) ||(mDay > now.get(Calendar.DAY_OF_MONTH)) || sendDate.getText().toString().isEmpty())
+        {
+            sendText.setTextColor(Color.RED);
+            sendText.setText("invalid date");
+            flag =true;
+        }
+        if(smYear > now.get(Calendar.YEAR) ||smMonth > now.get(Calendar.MONTH) ||(smDay > now.get(Calendar.DAY_OF_MONTH))||expectedDate.getText().toString().isEmpty())
+        {
+            expecText.setTextColor(Color.RED);
+            expecText.setText("invalid date");
+            flag=true;
+        }
      if(phone.length() < 9) {
          flag=true;
-         phone.setTextColor(Color.RED);
+         phoneText.setText("you must to insert a valid number");
+         phoneText.setTextColor(Color.RED);
 
      }
     if(!email.getText().toString().contains("@") || !email.getText().toString().contains("co") || !email.getText().toString().contains(".")) {
-        email.setTextColor(Color.RED);
-
+        emailtext.setTextColor(Color.RED);
+        emailtext.setText("you must insert a valid email");
         flag=true;
     }
-    if(address.getText().toString().isEmpty()) {
-        address.setTextColor(Color.RED);
+    if(address.getText().toString().isEmpty() || !address.getText().toString().contains(" ") ) {
+        addresstext.setText("you must insert an valid address");
+        addresstext.setTextColor(Color.RED);
         flag=true;
     }
     if(name.getText().toString().isEmpty()) {
-        name.setTextColor(Color.RED);
+        nametext.setTextColor(Color.RED);
+        nametext.setText("you must insert a name");
         flag=true;
     }
 
 
+
+   /* if(type.getSelectedItem().toString()||type.get )
+    {
+      expecText.setTextColor(Color.RED);
+      expecText.setText("choose an option");
+    }*/
+    if(weight.getSelectedItem().toString()== "select your option" )
+    {
+        weightText.setTextColor(Color.RED);
+        weightText.setText("choose an option");
+    }
     if(flag)
-        Toast.makeText(Add_Parcel.this,"INCORRECT INPUT",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Add_Parcel.this,"CHECK YOUR ANSWERS",Toast.LENGTH_SHORT).show();
     else{
         Parcel new_parcel = new Parcel(location.getText().toString(),type.getSelectedItem().toString(),weight.getSelectedItem().toString(),fragil.isChecked(),name.getText().toString(),
                 address.getText().toString(),sendDate.getText().toString(),expectedDate.getText().toString(),phone.getText().toString(),email.getText().toString()
         );
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Parcel" + new_parcel.getId());
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://senderapp-85057.firebaseio.com");
+
+
+
+        DatabaseReference myRef = database.getReference("Parcel" + String.valueOf(new Date().getTime()) );
+
+
 
         HashMap<String,String> hashMap =new HashMap<>();
         hashMap.put("Location",new_parcel.getLocation());

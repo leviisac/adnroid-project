@@ -15,14 +15,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gpstest-3c59e.firebaseio.com");
-        DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello, World!");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

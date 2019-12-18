@@ -26,8 +26,12 @@ import androidx.core.app.ActivityCompat;
 //import com.google.firebase.database.DatabaseReference;
 //import com.google.firebase.database.FirebaseDatabase;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,14 +40,17 @@ import java.util.Locale;
 public class Add_Parcel extends AppCompatActivity implements LocationListener {
 //implements View.OnClickListener
 
+
     private LocationManager locationManager;
 
 
+
     Button btnDatePicker, sendbtnDatePicker,confirm;
-    EditText txtDate, sendtxtDate,name,phone,email,address;
+    EditText sendDate, expectedDate,name,phone,email,address;
     CheckBox fragil;
     Spinner type,weight;
     TextView phoneText;
+    TextView location;
     private int mYear, mMonth, mDay, smYear, smMonth, smDay;
 
 
@@ -52,23 +59,16 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__parcel);
 
-        //////////////////FIreBase
-
-       /// FirebaseDatabase database = FirebaseDatabase.getInstance();
-       // DatabaseReference myRef = database.getReference("message");
-
-       // myRef.setValue("Hello, World!");
 
 
 
 
-        ///////////////////
 
         btnDatePicker = (Button) findViewById(R.id.btn_date);
-        txtDate = (EditText) findViewById(R.id.in_date);
+        sendDate = (EditText) findViewById(R.id.in_date);
 
         sendbtnDatePicker = (Button) findViewById(R.id.btn_send_date);
-        sendtxtDate = (EditText) findViewById(R.id.send_date);
+        expectedDate = (EditText) findViewById(R.id.send_date);
 
         name=(EditText) findViewById(R.id.Name);
         phone=(EditText) findViewById(R.id.Phone);
@@ -79,21 +79,27 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         weight=(Spinner) findViewById(R.id.spinner2);
         type=(Spinner) findViewById(R.id.spinner);
         phoneText=(TextView)  findViewById(R.id.phonetext);
+        location = (TextView) findViewById(R.id.location);
 
+       /* new_parcel.setName(name.getText().toString());
+        new_parcel.setPhoneNumber(phone.getText().toString());
+        new_parcel.setEmail(email.getText().toString());
+        new_parcel.setAddress(address.getText().toString());
+        new_parcel.setWeight(weight.getSelectedItem().toString());
+        new_parcel.setType(type.getSelectedItem().toString());
 
+        new_parcel.setFragile(fragil.isChecked());
+        new_parcel.setSendDate(sendDate.getText().toString());
+        new_parcel.setExpectedDate(expectedDate.getText().toString());
+        */
 
-
-
-
-        //LOCATION CONFIGURATIONS
-        /*
         Location mobileLocation;
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Add_Parcel.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         } else {
-        mobileLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            mobileLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Geocoder geocoder;
             List<Address> addresses = null;
             geocoder = new Geocoder(this, Locale.getDefault());
@@ -111,10 +117,12 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
             String postalCode = addresses.get(0).getPostalCode();
             String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
-            TextView textViewToChange = (TextView) findViewById(R.id.location);
-            textViewToChange.setText(
+
+            location.setText(
                     city + "  ," + state + "  ," + country + "  ," + postalCode);
+
         }
+
         if (ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Add_Parcel.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Add_Parcel.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
@@ -124,7 +132,39 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
                     0, this);
 
         }
-    */
+
+    /*
+        confirm.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                Parcel new_parcel = new Parcel(location.getText().toString(),type.getSelectedItem().toString(),weight.getSelectedItem().toString(),fragil.isChecked(),name.getText().toString(),
+                        address.getText().toString(),sendDate.getText().toString(),expectedDate.getText().toString(),phone.getText().toString(),email.getText().toString()
+                );
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Parcel" + new_parcel.getId());
+
+                HashMap<String,String> hashMap =new HashMap<>();
+                hashMap.put("Location",new_parcel.getLocation());
+                hashMap.put("Name",new_parcel.getName());
+                hashMap.put("Phone Number",new_parcel.getPhoneNumber());
+                hashMap.put("Email",new_parcel.getEmail());
+                hashMap.put("Address",new_parcel.getAddress());
+                hashMap.put("Weight",new_parcel.getWeight());
+                hashMap.put("Parcel Type",new_parcel.getType());
+                hashMap.put("Fragile",String.valueOf(new_parcel.isFragile()));
+                hashMap.put("Send Date",new_parcel.getSendDate());
+                hashMap.put("Expected Date",new_parcel.getExpectedDate());
+
+                myRef.setValue(hashMap);
+            }
+        });
+*/
+
+
+
+
+
 
 
     }
@@ -204,7 +244,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        sendDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                     }
                 }, mYear, mMonth, mDay);
@@ -232,7 +272,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
-                            sendtxtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            expectedDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                         }
                     }, smYear, smMonth, smDay);
@@ -264,9 +304,33 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         name.setTextColor(Color.RED);
         flag=true;
     }
+
+
     if(flag)
         Toast.makeText(Add_Parcel.this,"INCORRECT INPUT",Toast.LENGTH_SHORT).show();
     else{
+        Parcel new_parcel = new Parcel(location.getText().toString(),type.getSelectedItem().toString(),weight.getSelectedItem().toString(),fragil.isChecked(),name.getText().toString(),
+                address.getText().toString(),sendDate.getText().toString(),expectedDate.getText().toString(),phone.getText().toString(),email.getText().toString()
+        );
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Parcel" + new_parcel.getId());
+
+        HashMap<String,String> hashMap =new HashMap<>();
+        hashMap.put("Location",new_parcel.getLocation());
+        hashMap.put("Name",new_parcel.getName());
+        hashMap.put("Phone Number",new_parcel.getPhoneNumber());
+        hashMap.put("Email",new_parcel.getEmail());
+        hashMap.put("Address",new_parcel.getAddress());
+        hashMap.put("Weight",new_parcel.getWeight());
+        hashMap.put("Parcel Type",new_parcel.getType());
+        hashMap.put("Fragile",String.valueOf(new_parcel.isFragile()));
+        hashMap.put("Send Date",new_parcel.getSendDate());
+        hashMap.put("Expected Date",new_parcel.getExpectedDate());
+
+        myRef.setValue(hashMap);
+
+
 
         Toast.makeText(Add_Parcel.this,"the form has been submitted!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Add_Parcel.this, MainActivity.class));

@@ -25,7 +25,7 @@ public class History extends AppCompatActivity {
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                // HashMap temp= dataSnapshot.getValue(HashMap.class);
                 text.setText(String.valueOf(dataSnapshot.getValue()));

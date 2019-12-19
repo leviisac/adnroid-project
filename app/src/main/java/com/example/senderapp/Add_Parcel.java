@@ -47,7 +47,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     Spinner type,weight;
     TextView phoneText;
     TextView location,emailtext,nametext,addresstext,sendText,expecText,typeText,weightText,status;
-    private int mYear, mMonth, mDay, smYear, smMonth, smDay;
+    public int mYear, mMonth, mDay, smYear, smMonth, smDay;
 
 
     @Override
@@ -278,6 +278,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         weightText.setText("");
 
         Boolean flag=false;
+        Date today=new Date();
         if(mYear > now.get(Calendar.YEAR)||mMonth > now.get(Calendar.MONTH) ||(mDay > now.get(Calendar.DAY_OF_MONTH)) || sendDate.getText().toString().isEmpty())
         {
             sendText.setTextColor(Color.RED);
@@ -308,7 +309,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
     }
     if(name.getText().toString().isEmpty()) {
         nametext.setTextColor(Color.RED);
-        nametext.setText("you must insert a name");
+        nametext.setText("invalid name");
         flag=true;
     }
 

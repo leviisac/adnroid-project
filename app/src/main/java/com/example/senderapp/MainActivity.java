@@ -7,9 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,15 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btn = (Button)findViewById(R.id.button);
+        Button btn2 = (Button)findViewById(R.id.button2);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://senderapp-85057.firebaseio.com");
-        DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello, World!");
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, Add_Parcel.class));
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, History.class));
             }
         });
 

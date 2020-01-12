@@ -336,8 +336,9 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
 
 
 
-        DatabaseReference myRef = database.getReference("Parcel" + String.valueOf(new Date().getTime()) );
-
+        //DatabaseReference myRef = database.getReference("Parcel" + String.valueOf(new Date().getTime()) );
+        DatabaseReference myRef = database.getReference("Parcels" );
+        DatabaseReference myRef1 = myRef.child("Parcel" + String.valueOf(new Date().getTime()));
 
 
         HashMap<String,String> hashMap =new HashMap<>();
@@ -352,7 +353,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
         hashMap.put("Send Date",new_parcel.getSendDate());
         hashMap.put("Expected Date",new_parcel.getExpectedDate());
 
-        myRef.setValue(hashMap);
+        myRef1.setValue(hashMap);
 
 
 

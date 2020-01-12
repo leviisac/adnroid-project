@@ -332,7 +332,7 @@ public class Add_Parcel extends AppCompatActivity implements LocationListener {
                 address.getText().toString(),sendDate.getText().toString(),expectedDate.getText().toString(),phone.getText().toString(),email.getText().toString()
         );
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://senderapp-85057.firebaseio.com");
+        FirebaseDatabase database = FirebaseDatabase.getInstance(c);
 
 
 

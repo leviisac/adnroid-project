@@ -20,7 +20,7 @@ public class History extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://senderapp-85057.firebaseio.com/");
 
 
-        DatabaseReference myRef = database.getReference("Parcel1576754748229");
+        DatabaseReference myRef = database.getReference("Parcels");
 
 
         ValueEventListener postListener = new ValueEventListener() {

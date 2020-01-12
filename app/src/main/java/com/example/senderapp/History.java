@@ -28,7 +28,10 @@ public class History extends AppCompatActivity {
              public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                // HashMap temp= dataSnapshot.getValue(HashMap.class);
-                text.setText(String.valueOf(dataSnapshot.getValue()));
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    text.append("\n" + String.valueOf(dataSnapshot.getValue()));
+                }
                 // ...
             }
 
